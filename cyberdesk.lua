@@ -63,33 +63,39 @@ while task.wait(0.15) do
   if CandyRain == false and targett == nil then 
     local p = GetClosestPlayer() 
     if PL:FindFirstChild(p.Name) then
-      targett = p.Name
+      targett = p
     end
   end
   if CandyRain == false and targett ~= nil then
     if WS:FindFirstChild(targett).Humanoid.Health <= 0 or not WS:FindFirstChild(targett) then targett = "" return end
     path = CreatePlayerPath(targett)
     warns = 0
-    
     if path and warns < 250 then
       waypoints = path:GetWaypoints()
       for i, waypoint in pairs(waypoints) do
         Pmodel.Humanoid:MoveTo(waypoint.Position)
-
         if waypoint.Action == Enum.PathWaypointAction.Jump then
           Pmodel.Humanoid.Jump = true
         end
-
         local hitbox = workspace:GetPartBoundsInBox(Pmodel.HumanoidRootPart.CFrame, Vector3.new(7.5,7.5,7.5))
-  
         local istarget = false
         for i,v in pairs(hitbox) do
           if v.Parent.Name == targett.Name then
             istarget = true
             warns = -25
+            
+            local args = {
+              [1] = 2587827953509,
+              [2] = workspace:FindFirstChild(targett.Name),
+              [3] = Vector3.new(-58,17,-43),
+              [4] = 1.0390,
+              [5] = PL:FindFirstChild(targett.Name).Character:FindFirstChild("Left Arm"),
+              [6] = Vector3.new(0.44,-1.48,-0.9)
+            }
+            RST:FindFirstChild("Remote Events"):FindFirstChild("Punch"):FireServer(unpack(args))
+            task.wait(0.05)
           end
         end
-
         if istarget == false then
           warns += 1
         end
