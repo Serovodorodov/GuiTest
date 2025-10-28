@@ -11,7 +11,7 @@ local CandyRain = false
 while task.wait(0.1) do
   if Pmodel.Humanoid.Health <= 0 then return end
   if Inlobby == true then
-    Pmodel.Humanoid:MoveTo(WS.Portals:FindFirstChild("Arena Frame").Portal.CFrame)
+    Pmodel.Humanoid:MoveTo(WS.Portals:FindFirstChild("Arena Frame").Portal.Position)
     Pmodel.Humanoid.MoveToFinished:Wait()
     Inlobby = false
   end
@@ -19,7 +19,7 @@ while task.wait(0.1) do
   if CandyRain == true then if not WS:FindFirstChild("Candy Corn") then CandyRain = false end
     for _,Obj in pairs(WS:GetChildren()) do
       if Obj.Name == "Candy Corn" then
-        Pmodel.Humanoid:MoveTo(Obj.CFrame)
+        Pmodel.Humanoid:MoveTo(Obj.Position)
         Pmodel.Humanoid.MoveToFinished:Wait()
       end
     end
