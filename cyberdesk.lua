@@ -29,7 +29,7 @@ local function GetClosestPlayer()
   local magnitudes = {}
   local target = nil
   for i,player in pairs(PL:GetChildren()) do
-    local dist = player:DistanceFromCharacter(HRP.Position) 
+    local dist = player:DistanceFromCharacter(Pmodel.HumanoidRootPart.Position) 
 
     if dist <= range then
       table.insert(magnitudes, {dist, player})
@@ -47,7 +47,7 @@ end
 while task.wait(0.15) do
   if Pmodel.Humanoid.Health <= 0 then return end
   if Inlobby == true then
-    Pmodel.Humanoid:MoveTo(WS.Portals.CFrame)
+    Pmodel.Humanoid:MoveTo(WS.Portals:FindFirstChild("Arena Frame").Portal.Position)
     task.wait(0.5)
     Inlobby = false
   end
